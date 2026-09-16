@@ -21,7 +21,9 @@ let start = () => {
         txt.value = a;
     }, 1000)
 }
-
+function Name(){
+    
+}
 
 btnStart.addEventListener('click', Name)
 
