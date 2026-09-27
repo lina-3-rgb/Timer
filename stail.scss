@@ -1,7 +1,28 @@
 $main-color:  #9b9bd4;
 .clic{
+    &-txt{
+        display: flex;
+        padding: 12px;
+        margin: 300px 800px 10px;
+    }
+    &-increase{
+        display: flex;
+        margin: -51px 760px 0px ;
+    }
+    &-decrease{
+        display: flex;
+        margin: 9px 760px 0px ;
+    }
+    
     &-stop{
         background:$main-color;
+        margin:9px 800px 0px ;
     }
+    &-reboot{
+        display: flex;
+         background:$main-color;
+         margin: 0px 871px 0px ;
+    }
+
 }
 

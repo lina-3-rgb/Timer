@@ -1,38 +1,107 @@
-let a = 0;
+let time = 60;                  // время в секундах
 
-let timeElement;
+let inp = document.querySelector('.clic-txt');
+let btnUp = document.querySelector('.clic-increase');
+let btnDown = document.querySelector('.clic-decrease');
+let btnStop = document.querySelector('.clic-stop');     
+let btnReboot = document.querySelector('.clic-reboot'); 
+let btnPaus = document.querySelector('.clic-paus');
 
-let txt = document.querySelector('.clic-txt');
-
-let btnStart = document.querySelector('.clic-stop');
-
-let btnPause = document.querySelector('.clic-paus');
-
-let btnReset = document.querySelector('.clic-reboot');
-
-let btnInc = document.querySelector('.clic-increase');
-
-let btnDec = document.querySelector('.clic-decrease');
+let timer = null;               // сюда сохраним таймер
 
 
-let start = () => {
-    timeElement = setInterval(() => {
-        a++;
-        txt.value = a;
-    }, 1000)
+function show() {
+    let min = Math.floor(time / 60);   
+    let sec = time % 60;               
+
+    if (sec < 10) {
+        sec = '0' + sec;
+    }
+
+    if (min < 10) {
+        min = '0' + min;
+    }
+
+    inp.value = min + ':' + sec;
 }
-function Name(){
-    
+
+
+function start() {
+    if (timer !== null) {
+        return;                        
+    }
+
+    timer = setInterval(function () {
+        if (time > 0) {
+            time = time - 1;
+            show();
+        } else {
+            clearInterval(timer);
+            timer = null;
+            inp.value = 'Всё';
+        }
+    }, 1000);
 }
 
-btnStart.addEventListener('click', Name)
 
-btnPause.addEventListener('click', () => {
-    clearInterval(timeElement);
-})
+function stop() {
+    clearInterval(timer);
+    timer = null;
+}
 
-btnReset.addEventListener('click', () => {
-    clearInterval(timeElement);
-    a = 0;
-    txt.value = a;
-})
+
+btnUp.addEventListener('click', function () {
+    time = time + 60;
+    show();
+});
+
+
+btnDown.addEventListener('click', function () {
+    if (time >= 60) {
+        time = time - 60;
+    } else {
+        time = 0;
+    }
+    show();
+});
+
+
+btnStop.addEventListener('click', function () {
+    stop();
+    time = 0;
+    show();
+});
+
+
+btnReboot.addEventListener('click', function () {
+    stop();
+    time = 60;
+    show();
+    start();
+});
+
+
+btnPaus.addEventListener('click', function () {
+    if (timer === null) {
+        start();
+    } else {
+        stop();
+    }
+});
+
+
+inp.addEventListener('input', function () {
+    let text = inp.value;
+
+    if (text.includes(':')) {
+        let parts = text.split(':');
+        let m = Number(parts[0]);
+        let s = Number(parts[1]);
+        time = m * 60 + s;
+    } else {
+        time = Number(text);
+    }
+});
+
+// показать начальное время
+show();

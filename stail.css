@@ -1,3 +1,22 @@
+.clic-txt {
+  display: flex;
+  padding: 12px;
+  margin: 300px 800px 10px;
+}
+.clic-increase {
+  display: flex;
+  margin: -51px 760px 0px;
+}
+.clic-decrease {
+  display: flex;
+  margin: 9px 760px 0px;
+}
 .clic-stop {
   background: #9b9bd4;
+  margin: 9px 800px 0px;
+}
+.clic-reboot {
+  display: flex;
+  background: #9b9bd4;
+  margin: 0px 871px 0px;
 }/*# sourceMappingURL=stail.css.map */
